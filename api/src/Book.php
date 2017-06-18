@@ -71,7 +71,8 @@ class Book
 
         $result = $conn->querySql($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-        var_dump($result);
+        // return json_encode($result);
+        echo json_encode($result);
     }
 
 
@@ -88,12 +89,21 @@ class Book
     }
 
 
-
-    public static function update($author, $name, $description)
+    public static function update($id, $author, $name, $description)
     {
+        $conn = new Connection();
 
-        $sql = "UPDATE `books` SET `name`= :name,`author`= :author,`description`= :description WHERE 1";
+        $sql = "UPDATE `books` SET `name`= :name,`author`= :author,`description`= :description WHERE `id` = :id";
+            
+        $stmt = $conn->getConnection()->prepare($sql);
 
-        
+        $stmt->execute([ 'id' => $id,
+                         'name' => $name,
+                         'author' => $author,
+                         'description' => $description]);
+        if ($stmt) {
+            return true;
+        }
+        return false;
     }
 }
