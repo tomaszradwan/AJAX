@@ -11,16 +11,15 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
 
     case "POST":
-        
-        
+         # code...
         break;
 
     case "PUT":
-        
+         # code...
         break;
 
     case "DELETE":
-        
+         # code...
         break;
     
     default:
