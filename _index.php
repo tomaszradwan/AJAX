@@ -8,11 +8,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
     </head>
     <body>
-        <div>
-            
-                <input type="submit" id="1">
-            
-
+        <div id="first">
+            <button type="submit" id="1">All books</button>      
         </div>
     </body>
     <script src="api/js/ajax.js"></script>
