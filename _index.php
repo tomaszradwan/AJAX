@@ -11,7 +11,13 @@
         <div id="first">
             <button type="submit" id="1">All books</button>      
         </div>
-    </body>
+
+        <!--<table id="table1" border="1">
+            <th>id</th>
+            <th>name</th>
+            <th>author</th>
+            <th>description</th>
+        </table>-->
+    </body> 
     <script src="api/js/ajax.js"></script>
-    
 </html>

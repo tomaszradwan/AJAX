@@ -1,10 +1,10 @@
 
 jQuery(document).ready(function () {
 
-    $("#1").click(function () {
+    $("#first").on('click', function () {
         $.ajax({
             url: "api/books.php",
-            data: { id: 0 },
+            data: {},
             datatye: 'json',
             type: "GET",
             success: function (data) {
@@ -14,14 +14,13 @@ jQuery(document).ready(function () {
                 var allBooks = '';
 
                 $.each(jsonObj, function () {
-                    allBooks += "id: " + this['id'] + "<br/>";
-                    allBooks += "name: " + this['name'] + "<br/>";
-                    allBooks += "author: " + this['author'] + "<br/>";
-                    allBooks += "description: " + this['description'] + "<br/>";
-                    allBooks += "----------<br/>";
+                    allBooks += "<div>" + this['id'] + " ";
+                    allBooks += " " + this['name'] + " ";
+                    allBooks += " " + this['author'] + " ";
+                    allBooks += " " + this['description'] + "</div>" + "<div></div>";
                 });
 
-                var newElem = $("<div>" + allBooks + "</div>");
+                var newElem = $(allBooks);
 
                 $('div#first').after(newElem);
             },

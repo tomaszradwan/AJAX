@@ -5,7 +5,7 @@ include "./src/Book.php";
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case "GET":
-        if (isset($_GET['id'])) {
+        if (isset($_GET)) {
             Book::readAll();
         }
         break;
