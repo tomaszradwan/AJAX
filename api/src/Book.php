@@ -3,59 +3,56 @@
 
 include "connection.php";
 
-class Book
-{
-    private $id= -1;
+class Book {
+
+    private $id = -1;
     private $name = "";
     private $author = "";
     private $description = "";
 
-    public function setName($name)
-    {
+    public function setId($id) {
+        $this->id = $id;
+    }
+
+    public function setName($name) {
         $this->name = $name;
     }
 
-    public function setAuthor($author)
-    {
+    public function setAuthor($author) {
         $this->author = $author;
     }
 
-    public function setDescription($description)
-    {
+    public function setDescription($description) {
         $this->description = $description;
     }
 
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
-    public function getAuthor()
-    {
+    public function getAuthor() {
         return $this->author;
     }
 
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
 
-    public function create()
-    {
+    public function create() {
+
         $conn = new Connection();
 
-        $sql ="INSERT INTO `books`(`name`, `author`, `description`) VALUES (:name, :author, :description)";
-    
+        $sql = "INSERT INTO `books`(`name`, `author`, `description`) VALUES (:name, :author, :description)";
+
         $stmt = $conn->getConnection()->prepare($sql);
 
-        $stmt->execute([ 'name' => $this->name,
-                         'author' => $this->author,
-                         'description' => $this->description]);
+        $stmt->execute(['name' => $this->name,
+            'author' => $this->author,
+            'description' => $this->description]);
         if ($stmt) {
             $this->id = $conn->getConnection()->lastInsertId();
             return true;
@@ -63,47 +60,61 @@ class Book
         return false;
     }
 
-    public static function readAll()
-    {
+    public static function getById($id) {
+
+        $conn = new Connection();
+
+        $sql = "SELECT * FROM `books` WHERE `id` = $id";
+
+        $result = $conn->querySql($sql)->fetch(PDO::FETCH_ASSOC);
+
+        $book = new Book;
+        $book->setAuthor($result['author']);
+        $book->setName($result['name']);
+        $book->setDescription($result['description']);
+        $book->setId($result['id']);
+
+        echo json_encode($result);
+    }
+
+    public static function readAll() {
+
         $conn = new Connection();
 
         $sql = "SELECT * FROM `books`";
 
         $result = $conn->querySql($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-        // return json_encode($result);
         echo json_encode($result);
     }
 
+    public static function delete($id) {
 
-
-    public static function delete($id)
-    {
         $conn = new Connection();
 
         $sql = "DELETE FROM `books` WHERE id=:id";
 
         $stmt = $conn->getConnection()->prepare($sql);
-             
-        $stmt->execute(['id'=>$id]);
+
+        $stmt->execute(['id' => $id]);
     }
 
+    public static function update($id, $author, $name, $description) {
 
-    public static function update($id, $author, $name, $description)
-    {
         $conn = new Connection();
 
         $sql = "UPDATE `books` SET `name`= :name,`author`= :author,`description`= :description WHERE `id` = :id";
-            
+
         $stmt = $conn->getConnection()->prepare($sql);
 
-        $stmt->execute([ 'id' => $id,
-                         'name' => $name,
-                         'author' => $author,
-                         'description' => $description]);
+        $stmt->execute(['id' => $id,
+            'name' => $name,
+            'author' => $author,
+            'description' => $description]);
         if ($stmt) {
             return true;
         }
         return false;
     }
+
 }
