@@ -50,9 +50,12 @@ class Book {
 
         $stmt = $conn->getConnection()->prepare($sql);
 
-        $stmt->execute(['name' => $this->name,
+        $stmt->execute([
+            'name' => $this->name,
             'author' => $this->author,
-            'description' => $this->description]);
+            'description' => $this->description
+        ]);
+
         if ($stmt) {
             $this->id = $conn->getConnection()->lastInsertId();
             return true;
@@ -68,11 +71,11 @@ class Book {
 
         $result = $conn->querySql($sql)->fetch(PDO::FETCH_ASSOC);
 
-        $book = new Book;
-        $book->setAuthor($result['author']);
-        $book->setName($result['name']);
-        $book->setDescription($result['description']);
-        $book->setId($result['id']);
+//        $book = new Book;
+//        $book->setAuthor($result['author']);
+//        $book->setName($result['name']);
+//        $book->setDescription($result['description']);
+//        $book->setId($result['id']);
 
         echo json_encode($result);
     }

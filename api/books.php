@@ -24,17 +24,22 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $newBook->setAuthor($author);
             $newBook->setName($name);
             $newBook->setDescription($description);
-           
+
+            if ($newBook->create()) {
+                echo "SAVE!";
+            }
+            return;
         }
 
         break;
 
-    case "PUT":
-        # code...
-        break;
-
     case "DELETE":
-        # code...
+        parse_str(file_get_contents("php://input"), $deleteVars);
+
+        if (Book::delete($deleteVars['id'])) {
+            echo "DELETE SUCCESS !";
+        }
+
         break;
 
     default:
