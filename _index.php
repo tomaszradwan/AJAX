@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,11 +11,11 @@
 
         <form method="POST">
             Name:<br/>
-            <input type="text" name="name"><br/>
+            <input type="text" name="name" required><br/>
             Author:<br/>
-            <input type="text" name="author"><br/>
+            <input type="text" name="author" required><br/>
             Description:<br/>
-            <input type="text" name="description"><br/>
+            <input type="text" name="description" required><br/>
 
             <input type="submit" value="newBook">
         </form>

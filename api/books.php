@@ -20,15 +20,18 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $name = $_POST['name'];
             $description = $_POST['description'];
 
-            $newBook = new Book();
-            $newBook->setAuthor($author);
-            $newBook->setName($name);
-            $newBook->setDescription($description);
+            if (strlen($author) > 0 && strlen($name) > 0 && strlen($description) > 0) {
 
-            if ($newBook->create()) {
-                echo "SAVE!";
+                $newBook = new Book();
+                $newBook->setAuthor($author);
+                $newBook->setName($name);
+                $newBook->setDescription($description);
+
+                if ($newBook->create()) {
+                    echo "SAVE!";
+                }
+                return;
             }
-            return;
         }
 
         break;
@@ -43,6 +46,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
 
     default:
-        # code...
+        echo "ERROR !";
         break;
 }
