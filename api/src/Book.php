@@ -1,4 +1,3 @@
-
 <?php
 
 include "connection.php";
@@ -71,12 +70,6 @@ class Book {
 
         $result = $conn->querySql($sql)->fetch(PDO::FETCH_ASSOC);
 
-//        $book = new Book;
-//        $book->setAuthor($result['author']);
-//        $book->setName($result['name']);
-//        $book->setDescription($result['description']);
-//        $book->setId($result['id']);
-
         echo json_encode($result);
     }
 
@@ -100,6 +93,11 @@ class Book {
         $stmt = $conn->getConnection()->prepare($sql);
 
         $stmt->execute(['id' => $id]);
+
+        if ($stmt) {
+            return true;
+        }
+        return false;
     }
 
     public static function update($id, $author, $name, $description) {
@@ -115,6 +113,7 @@ class Book {
             'name' => $name,
             'author' => $author,
             'description' => $description]);
+
         if ($stmt) {
             return true;
         }
