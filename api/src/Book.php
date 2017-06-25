@@ -110,7 +110,8 @@ class Book {
 
         $stmt = $conn->getConnection()->prepare($sql);
 
-        $stmt->execute(['id' => $id,
+        $stmt->execute([
+            'id' => $id,
             'name' => $name,
             'author' => $author,
             'description' => $description]);

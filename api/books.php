@@ -45,6 +45,20 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         break;
 
+    case "PUT":
+        parse_str(file_get_contents("php://input"), $put_vars);
+
+        $id = $put_vars['id'];
+        $author = $put_vars['author'];
+        $name = $put_vars['name'];
+        $description = $put_vars['description'];
+
+        if (Book::update($id, $author, $name, $description)) {
+            echo "UPDATE SUCCESS !";
+        }
+
+        break;
+
     default:
         echo "ERROR !";
         break;

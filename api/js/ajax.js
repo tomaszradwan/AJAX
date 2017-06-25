@@ -15,9 +15,11 @@ jQuery(document).ready(function () {
                 var allBooks = "";
 
                 $.each(jsonObj, function () {
-                    allBooks += "<div>" + "ID: " + this['id'] + " "
+                    allBooks += "<div>"
+                            + "ID: " + this['id'] + " "
                             + "<button type='submit' name=" + this['id'] + ">rozwiń / zwiń</button>"
-                            + "<div class='hide'></div>" + "</div>";
+                            + "<div class='hide'></div>"
+                            + "</div>";
                 });
 
                 var newElem = $(allBooks);
@@ -39,18 +41,12 @@ jQuery(document).ready(function () {
                         success: function (json) {
 
                             var book =
-                                    "Id: " + "<input type='text' name='inputId' value=" + json['id'] + ">"
-                                    + "</br>" + "Name: " + "<input type='text' name='inputName' value=" + json['name'] + ">"
-                                    + "</br>" + "Author: " + "<input type='text' name='inputAuthor' value=" + json['author'] + ">"
-                                    + "</br>" + "Description: " + "<input type='text' name='inputDescription' value=" + json['description'] + ">"
-
-//                                    "ID: " + json['id']
-//                                    + "</br>" + "Name: " + json['name']
-//                                    + "</br>" + "Author: " + json['author']
-//                                    + "</br>" + "Description: " + json['description']
-
-                                    + "</br><input type='button' id='deleteBook' name=" + json['id'] + " value='DELETE'/>"
-                                    + "<input type='button' id='updateBook' name=" + json['id'] + " value='UPDATE'/>";
+                                    "ID: " + json['id']
+                                    + "</br>" + "Name: " + "<input type='text' name='inputName' value='" + json['name'] + "'>"
+                                    + "</br>" + "Author: " + "<input type='text' name='inputAuthor' value='" + json['author'] + "'>"
+                                    + "</br>" + "Description: " + "<input type='text' name='inputDescription' value='" + json['description'] + "'>"
+                                    + "</br><input type='button' id='deleteBook' name='" + json['id'] + "' value='DELETE'/>"
+                                    + "<input type='button' id='updateBook' name='" + json['id'] + "' value='UPDATE'/>";
 
                             div.html(book);
 
@@ -74,6 +70,37 @@ jQuery(document).ready(function () {
 
                                     }
                                 }).done($(this).parent().parent().remove());
+                            });
+
+
+                            $("input[id='updateBook']").click(function () {
+                                var id = $(this).attr('name');
+                                var name = $(this).parent().find("[name='inputName']").val();
+                                var author = $(this).parent().find("[name='inputAuthor']").val();
+                                var description = $(this).parent().find("[name='inputDescription']").val();
+
+                                $.ajax({
+                                    url: "api/books.php",
+                                    data: {
+                                        id: id,
+                                        author: author,
+                                        name: name,
+                                        description: description,
+                                    },
+                                    type: "PUT",
+                                    dataType: "text",
+                                    success: function () {
+                                        alert("UPDATE SUCCESS !");
+                                    },
+                                    error: function (xhr, status, errorThrown) {
+                                        alert(status);
+                                        alert(xhr);
+                                        alert(errorThrown);
+                                    },
+                                    complete: function (xhr, status) {
+
+                                    }
+                                });
                             });
                         },
                         error: function () {
@@ -106,7 +133,7 @@ jQuery(document).ready(function () {
             },
             error: function () {
                 alert("ERROR - CANNOT SAVE !");
-            },
+            }
         });
     });
 });
