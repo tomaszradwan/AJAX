@@ -67,7 +67,7 @@ jQuery(document).ready(function () {
                                         alert(errorThrown);
                                     },
                                     complete: function (xhr, status) {
-
+                                        console.log("OK");
                                     }
                                 }).done($(this).parent().parent().remove());
                             });
@@ -98,7 +98,7 @@ jQuery(document).ready(function () {
                                         alert(errorThrown);
                                     },
                                     complete: function (xhr, status) {
-
+                                        console.log("OK");
                                     }
                                 });
                             });

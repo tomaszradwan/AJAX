@@ -28,7 +28,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 $newBook->setDescription($description);
 
                 if ($newBook->create()) {
-                    echo "SAVE!";
+                    echo "SAVE SUCCESS!";
                 }
                 return;
             }
