@@ -14,7 +14,7 @@ and open the template in the editor.
 
 .visible {
     display: block;
-    color: green;
+    color: blue;
 }
 form, #allBooks {
     padding-left: 10%;

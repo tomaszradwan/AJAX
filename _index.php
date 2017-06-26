@@ -11,7 +11,7 @@
     <body>
 
         <form method="POST">
-            Name:<br/>
+            Book name:<br/>
             <input type="text" name="name" required><br/>
             Author:<br/>
             <input type="text" name="author" required><br/>
