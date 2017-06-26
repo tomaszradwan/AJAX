@@ -1,6 +1,6 @@
 Technologies:
 
+AJAX
 PHP
 MySQL
-AJAX
 HTML

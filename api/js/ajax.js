@@ -1,7 +1,7 @@
 
 jQuery(document).ready(function () {
 
-    $("#1").on('click', function () {
+    $("#1").one('click', function () {
         $.ajax({
             url: "api/books.php",
             data: {all: "all"},
@@ -15,7 +15,7 @@ jQuery(document).ready(function () {
                 var allBooks = "";
 
                 $.each(jsonObj, function () {
-                    allBooks += "<div>"
+                    allBooks += "<div class ='eachBook'>"
                             + "ID: " + this['id'] + " "
                             + "<button type='submit' name=" + this['id'] + ">rozwiń / zwiń</button>"
                             + "<div class='hide'></div>"
@@ -41,8 +41,8 @@ jQuery(document).ready(function () {
                         success: function (json) {
 
                             var book =
-                                    "ID: " + json['id']
-                                    + "</br>" + "Name: " + "<input type='text' name='inputName' value='" + json['name'] + "'>"
+//                                    "ID: " + json['id'] +
+                                    "</br>" + "Name: " + "<input type='text' name='inputName' value='" + json['name'] + "'>"
                                     + "</br>" + "Author: " + "<input type='text' name='inputAuthor' value='" + json['author'] + "'>"
                                     + "</br>" + "Description: " + "<input type='text' name='inputDescription' value='" + json['description'] + "'>"
                                     + "</br><input type='button' id='deleteBook' name='" + json['id'] + "' value='DELETE'/>"

@@ -15,5 +15,12 @@ and open the template in the editor.
 .visible {
     display: block;
     color: green;
-    padding: 2%;
+}
+form, #allBooks {
+    padding-left: 10%;
+}
+
+.eachBook {
+    padding: 1%;
+    padding-left: 10%;
 }
